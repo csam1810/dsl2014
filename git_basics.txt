@@ -1,0 +1,26 @@
+Configuration:
+git config --global user.name "your.name"
+git config --global user.email "your.email"
+
+Setup:
+git init (in new folder)
+git remote add origin https://github.com/csam1810/dsl2014.git (add remote repo)
+
+Remote Repo credentials:
+username: csam1810
+password: dslproject2014
+
+Get stuff from remote repo:
+git fetch origin master
+git pull origin master
+
+Commit stuff locally:
+git add <folder, data> (stage changes for commit)
+git commit -m "<your comment>"
+
+Push committed stuff to remote repo:
+git push origin master
+
+Useful commands:
+git status (tells you what is staged and what isn't)
+gitk (simple graphical interface)
