@@ -101,6 +101,8 @@ model << c
 
 // Alll Query things
 
+// <model> evtl nicht noetig wenn model static ist.
+
 //on <model> select <sel> from <clazz>
 //on <model> select <sel> from <clazz> order <ord>
 //on <model> select <sel> from <clazz> where <whr>
