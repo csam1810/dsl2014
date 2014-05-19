@@ -58,7 +58,7 @@ class Articles extends Entity {
 class Comments extends Entity {
 	
 	@Id
-	def id       = 1
+	def id
 	
 	@Column(length = 200)
 	def myuser   = 'horst'
@@ -79,7 +79,7 @@ class Comments extends Entity {
 	 * 
 	 */
 	//@ManyToOne('comments')
-	def Articles article 
+	//def Articles article 
 }
 
 def model = new Model()
@@ -87,7 +87,7 @@ def model = new Model()
 c = new Comments()
 
 // Persist c to model
-//model << c
+model << c
 
 // Delete c from model
 //model >> c
