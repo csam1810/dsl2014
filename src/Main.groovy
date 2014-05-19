@@ -79,7 +79,7 @@ class Comments extends Entity {
 	 * 
 	 */
 	//@ManyToOne('comments')
-	def Articles article 
+	//def Articles article 
 }
 
 def model = new Model()
@@ -100,6 +100,8 @@ c = new Comments()
 //println model[Comments]
 
 // Alll Query things
+
+// <model> evtl nicht noetig wenn model static ist.
 
 //on <model> select <sel> from <clazz>
 //on <model> select <sel> from <clazz> order <ord>
