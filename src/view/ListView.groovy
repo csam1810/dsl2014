@@ -4,21 +4,12 @@ import java.awt.BorderLayout
 import java.awt.GridLayout
 import java.awt.LayoutManager;
 
-import view.DetailView.LayoutEnum;
+import view.ViewComponent.LayoutEnum;
 
-class ListView {
-	
-	public static enum LayoutEnum {
-		border, grid
-	}
-	
-	//has to be unique!!
-	def String viewName
-	
-	def LayoutManager layout
+class ListView extends ViewComponent {
 	
 	ListView(String name, LayoutEnum layoutType) {
-		viewName = name
+		super(name)
 		switch(layoutType) {
 			case LayoutEnum.border:
 				layout = new BorderLayout();
@@ -27,8 +18,10 @@ class ListView {
 				layout = new GridLayout();
 				break;
 			default:
+				layout = null
 				break;
 		}
+		
 	}
 
 }

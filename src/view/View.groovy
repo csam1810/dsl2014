@@ -3,7 +3,7 @@ package view
 import javax.swing.JFrame
 
 import model.Model
-import view.DetailView.LayoutEnum
+import view.ViewComponent.LayoutEnum
 
 class View {
 	
@@ -17,7 +17,6 @@ class View {
 		views = [:] //new HashMap<String, ViewComponent>()
 	}
 	
-	// view detail "sau" 
 	private static def view(Model model, String selection) {
 		[detail : { viewName -> 
 			[layout : { LayoutEnum layout ->

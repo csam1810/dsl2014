@@ -3,21 +3,15 @@ package view
 import java.awt.BorderLayout
 import java.awt.GridLayout
 import java.awt.LayoutManager
+import javax.swing.JComponent
 import javax.swing.JPanel
+import view.ViewComponent.LayoutEnum
 
-class DetailView extends JPanel implements ViewComponent  {
-	
-	public static enum LayoutEnum {
-		border, grid
-	}
-	
-	//has to be unique!!
-	def String viewName
-	
-	def LayoutManager layout
+class DetailView extends ViewComponent  {
 	
 	DetailView(String name, LayoutEnum layoutType) {
-		viewName = name
+		super(name)
+
 		switch(layoutType) {
 			case LayoutEnum.border:
 				layout = new BorderLayout();
@@ -26,6 +20,7 @@ class DetailView extends JPanel implements ViewComponent  {
 				layout = new GridLayout();
 				break;
 			default:
+				layout = null
 				break;
 		}
 	}
