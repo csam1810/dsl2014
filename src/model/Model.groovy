@@ -21,13 +21,8 @@ class Model {
 	 * 
 	 * 
 	 */
-	Model() {
-		connection = Sql.newInstance(
-			"jdbc:mysql://localhost:3306/feedback",
-			"sqluser",
-			"sqluserpw",
-			"com.mysql.jdbc.Driver"
-		)
+	Model(Sql connection) {
+		this.connection = connection
 	}
 	
 	/**
@@ -61,7 +56,7 @@ class Model {
 	 * @return  A Collection of all table entries for a given class.
 	 */
 	def getAt(Class clazz) {
-		query("SELECT * FROM " + clazz.name, clazz)
+		query("SELECT * FROM " + clazz?.simpleName, clazz)
 	}
 	
 	/**
@@ -83,7 +78,7 @@ class Model {
 	 * @return
 	 */
 	def <T extends Entity> T queryFirst(String sql, Class<T> clazz) {
-		return query(sql, clazz).first();
+		return { r -> (r.empty) ? null : r?.first() }( query(sql, clazz) )
 	}
 
 	/**
@@ -98,7 +93,7 @@ class Model {
 		// TODO: Null Check.
 		def name = getIdFieldName(clazz)
 		return queryFirst(
-			"SELECT * FROM " + clazz.name + 
+			"SELECT * FROM " + clazz?.simpleName + 
 			" WHERE " + name + " = ${id}",
 			clazz
 		)
@@ -130,14 +125,14 @@ class Model {
 		
 		// Insert data and retrieve assigend id.
 		def id = connection.executeInsert(
-			"INSERT INTO " + entity.class.name + 
+			"INSERT INTO " + entity?.class.simpleName + 
 			" (" + colStr + ") VALUES (" + valStr + ")", 
 			values
 		)
 		
 		// id is List<List<Integer>> in our case. 
 		// Get rid of the extra lists.
-		id?.first().first()
+		id?.first()?.first()
 	}
 	//connection.dataSet(entity.class).add( getProperties(entity) )
 	
@@ -161,7 +156,7 @@ class Model {
 	 * 
 	 * @param entity  An Entity that shall be saved or updated.
 	 */
-	def void persist(Entity entity) {
+	def Integer persist(Entity entity) {
 		if (getIdFieldValue(entity) == null) save(entity) else update(entity)
 	}
 		
@@ -174,11 +169,11 @@ class Model {
 	def void delete(Entity entity) {
 
 		// TODO: Null Check.
-		def name = getIdFieldName(entity.class)
+		def name = getIdFieldName(entity?.class)
 		def value = entity."${name}"
 		// TODO: Throws ?
 		connection.execute(
-			"DELETE FROM " + entity.class.name + 
+			"DELETE FROM " + entity?.class.simpleName + 
 			" WHERE " + name + " = ${value}"
 		)
 	}
@@ -198,7 +193,6 @@ class Model {
 
 		def instance = clazz.newInstance()
 
-		//result.keySet().each { instance."${it}" = result."${it}" }
 		result.keySet().each { instance."${it}" = result[it] }
 		return instance
 	}

@@ -23,8 +23,8 @@ class AnnotationUtils {
 	 */
 	static def getIdFieldName(Class clazz) {
 		
-		def fields = clazz.declaredFields
-		def field = fields.find { f -> f.getAnnotation(Id) != null }
+		def fields = clazz?.declaredFields
+		def field = fields?.find { f -> f.getAnnotation(Id) != null }
 		field?.name
 	}
 	
