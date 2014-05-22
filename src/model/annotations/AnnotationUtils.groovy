@@ -36,7 +36,7 @@ class AnnotationUtils {
 	 * @return  The value of the id field.
 	 */
 	static def getIdFieldValue(Entity entity) {
-		entity?."${getIdFieldName(entity.class)}"
+		entity?."${getIdFieldName(entity?.class)}"
 	}
 	
 	/**

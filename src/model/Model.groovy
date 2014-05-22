@@ -18,8 +18,9 @@ class Model {
 	private def Sql connection
 
 	/**
+	 * Creates a new model from a Sql connection object.
 	 * 
-	 * 
+	 * @param connection  A Sql instance.
 	 */
 	Model(Sql connection) {
 		this.connection = connection
@@ -60,33 +61,35 @@ class Model {
 	}
 	
 	/**
+	 * Issues a select query and transforms the retrieved rows to appropriate
+	 * Entity classes.
 	 * 
-	 * 
-	 * @param sql
-	 * @param clazz
-	 * @return
+	 * @param sql  The SQL select query.
+	 * @param clazz  The Entity class type the rows will be mapped to.
+	 * @return  A List of Entities.
 	 */
 	def <T extends Entity> List<T> query(String sql, Class<T> clazz) {
 		return connection.rows(sql).collect { row -> asClass(row, clazz) }
 	}
 
 	/**
+	 * Issues a select query and mapps the retrieved single row to its
+	 * appropriate Entity class.
 	 * 
-	 * 
-	 * @param sql
-	 * @param clazz
-	 * @return
+	 * @param sql  The SQL select query.
+	 * @param clazz  The Entity class type the row will be mapped to.
+	 * @return  A single Entity.
 	 */
 	def <T extends Entity> T queryFirst(String sql, Class<T> clazz) {
 		return { r -> (r.empty) ? null : r?.first() }( query(sql, clazz) )
 	}
 
 	/**
+	 * Retrieves the Entity row with a specific Id.
 	 * 
-	 * 
-	 * @param id
-	 * @param clazz
-	 * @return
+	 * @param id  The Id of the Entity to be retrieved.
+	 * @param clazz  The Entity's class type.
+	 * @return  Entity instance of the row.
 	 */
 	def <T extends Entity> T get(Integer id, Class<T> clazz) {
 
@@ -100,13 +103,13 @@ class Model {
 	}
 
 	/**
+	 * Saves an Entity and returns the Id of the Entry in the database.
 	 * 
-	 * 
-	 * @param entity
-	 * @return
+	 * @param entity  An Entity.
+	 * @return  The Id of the Entity's row in the database.
 	 */
 	def Integer save(Entity entity) {
-		
+
 		def props = getProperties(entity)
 		def columns = []
 		def qmarks = []
