@@ -1,9 +1,10 @@
 package view
 
-import java.awt.LayoutManager;
-import java.util.Map;
+import java.awt.Component
+import java.awt.LayoutManager
 
-import javax.swing.JComponent;
+import javax.swing.JButton
+import javax.swing.JComponent
 import javax.swing.JPanel
 
 class ViewComponent extends JPanel {
@@ -15,12 +16,54 @@ class ViewComponent extends JPanel {
 	//has to be unique!!
 	def String viewName
 	
-	def LayoutManager layout
+	//def LayoutManager layout
 	
 	def Map<String, JComponent> viewComponents
 	
-	ViewComponent(String viewname) {
-		viewName = viewname;
+	ViewComponent(LayoutManager layoutManager) {
+		
+		super(layoutManager)
 		viewComponents = [:]
+	}
+	
+//	ViewComponent(String viewname, LayoutEnum layoutType) {
+//		viewName = viewname;
+//		
+//		switch(layoutType) {
+//			case LayoutEnum.border:
+//				layout = new BorderLayout();
+//				break;
+//			case LayoutEnum.grid:
+//				layout = new GridLayout();
+//				break;
+//			default:
+//				layout = null
+//				break;
+//		}
+//		
+//		viewComponents = [:]
+//	}
+	
+	/**
+	 * Adds a new button to this view.
+	 * 
+	 * @param name  The name of the button.
+	 */
+	def void addButton(String name) {
+		// Hier waere Platz um den button zu stylen.
+		this.addWithName(name, new JButton(name))
+	}
+	
+	/**
+	 * Adds a component to this view and a map for later
+	 * retrieval by its name.
+	 * 
+	 * @param name  The name of the component in the map.
+	 * @param component  The component.
+	 */
+	private def void addWithName(String name, Component component) {
+		
+		super.add(component)
+		this.viewComponents[name] = component
 	}
 }
