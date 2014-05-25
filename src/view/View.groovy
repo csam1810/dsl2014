@@ -7,8 +7,7 @@ import java.awt.event.ActionListener
 
 import javax.swing.JButton
 import javax.swing.JFrame
-
-import view.ViewComponent.LayoutEnum
+import javax.swing.JPanel
 
 class View {
 	
@@ -18,10 +17,14 @@ class View {
 	}
 	
 	private static def JFrame mainFrame = new JFrame()
+
+	private static def Map<String, ViewComponent> views = [:]
 	
-	static def Map<String, ViewComponent> views = [:]
-	// a map to keep track of layout managers associated with viewnames
-	static def Map<String, LayoutManager> layoutManagers = [:]
+	/**
+	 * A static instance of the FormBuilder. Allows for
+	 * builder-like creation of Forms.
+	 */
+	static def FormBuilder builder = new FormBuilder(views)
 	
 //	static def initialize() {
 //		mainFrame = new JFrame()		
@@ -53,8 +56,6 @@ class View {
 	static def view(String viewName) {
 		[grid : { Integer rows, Integer cols ->
 			GridLayout gLayout = new GridLayout(rows, cols, 1, 1)
-			views[viewName] = new ViewComponent(gLayout)
-			layoutManagers[viewName] = gLayout
 		}]
 	}
 	
@@ -68,30 +69,31 @@ class View {
 		}]
 	}
 	
-	private static def addWidget(
-		String viewName, 
-		Widgets widget, 
-		String name,
-		Integer xPos,
-		Integer yPos
-	) {
-	
-		if (viewName in views) {
-			switch (widget) {
-				case Widgets.GButton:
-					if(layoutManagers[viewName] instanceof GridLayout) {
-						GridLayout grid = (GridLayout) layoutManagers[viewName]
-						if(xPos < 0 || grid.getRows() < xPos || yPos < 0 || grid.getColumns() < yPos) {
-							//TODO here a reasonable error should be thrown
-							println("ERROR: tried to set component on impossible position! Created on default position for now.")
-							views[viewName].addButton(name)
-						} else {
-							views[viewName].addButton(name, xPos, yPos)
-						}
-					}
-			}
-		}
-	}
+	//not needed anymore?
+//	private static def addWidget(
+//		String viewName, 
+//		Widgets widget, 
+//		String name,
+//		Integer xPos,
+//		Integer yPos
+//	) {
+//	
+//		if (viewName in views) {
+//			switch (widget) {
+//				case Widgets.GButton:
+//					if(layoutManagers[viewName] instanceof GridLayout) {
+//						GridLayout grid = (GridLayout) layoutManagers[viewName]
+//						if(xPos < 0 || grid.getRows() < xPos || yPos < 0 || grid.getColumns() < yPos) {
+//							//TODO here a reasonable error should be thrown
+//							println("ERROR: tried to set component on impossible position! Created on default position for now.")
+//							views[viewName].addButton(name)
+//						} else {
+//							views[viewName].addButton(name, xPos, yPos)
+//						}
+//					}
+//			}
+//		}
+//	}
 	
 	static def on(String viewName) {
 		[button : { String buttonName ->
@@ -108,14 +110,13 @@ class View {
 	) {
 		
 		if (viewName in views && buttonName in views[viewName].viewComponents) {
-			views[viewName].viewComponents[buttonName].addActionListener(
+			views[viewName][buttonName].addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						closure()
+						closure(views[viewName])
 					}
 				}
 			)
 		}
 	}
-	
 }

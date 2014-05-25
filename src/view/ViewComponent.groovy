@@ -31,6 +31,22 @@ class ViewComponent extends JPanel {
 			//initializeComponentMatrix((GridLayout) layoutManager)
 		}
 	}
+
+	//ViewComponent() {
+	//	
+	//	super()
+	//	viewComponents = [:]
+	//}
+		
+	/**
+	 * view["SaveButton"]
+	 * 
+	 * @param componentName
+	 * @return
+	 */
+	def getAt(String componentName) {
+		return viewComponents[componentName]
+	}
 	
 	//TODO AJ: not finished, commented for now
 //	def void initializeComponentMatrix(GridLayout grid) {
@@ -72,7 +88,7 @@ class ViewComponent extends JPanel {
 	 * @param name  The name of the button.
 	 */
 	def void addButton(String name) {
-		// Hier waere Platz um den button zu stylen.
+		// Hier waere Platz um den button uniform zu stylen.
 		this.addWithName(name, new JButton(name))
 	}
 	
