@@ -1,6 +1,7 @@
 package view
 
 import java.awt.GridLayout
+import java.awt.LayoutManager
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
@@ -19,6 +20,8 @@ class View {
 	private static def JFrame mainFrame = new JFrame()
 	
 	static def Map<String, ViewComponent> views = [:]
+	// a map to keep track of layout managers associated with viewnames
+	static def Map<String, LayoutManager> layoutManagers = [:]
 	
 //	static def initialize() {
 //		mainFrame = new JFrame()		
@@ -49,14 +52,18 @@ class View {
 	
 	static def view(String viewName) {
 		[grid : { Integer rows, Integer cols ->
-			views[viewName] = new ViewComponent(new GridLayout(rows, cols, 1, 1))
+			GridLayout gLayout = new GridLayout(rows, cols, 1, 1)
+			views[viewName] = new ViewComponent(gLayout)
+			layoutManagers[viewName] = gLayout
 		}]
 	}
 	
 	static def add(String name) {
 		[type : { Widgets widget ->
 			[to : { viewName ->
-				addWidget(viewName, widget, name)
+				[onPos : { Integer xPos, Integer yPos ->
+					addWidget(viewName, widget, name, xPos, yPos)
+				}]
 			}]
 		}]
 	}
@@ -64,13 +71,24 @@ class View {
 	private static def addWidget(
 		String viewName, 
 		Widgets widget, 
-		String name
+		String name,
+		Integer xPos,
+		Integer yPos
 	) {
 	
 		if (viewName in views) {
 			switch (widget) {
 				case Widgets.GButton:
-					views[viewName].addButton(name)
+					if(layoutManagers[viewName] instanceof GridLayout) {
+						GridLayout grid = (GridLayout) layoutManagers[viewName]
+						if(xPos < 0 || grid.getRows() < xPos || yPos < 0 || grid.getColumns() < yPos) {
+							//TODO here a reasonable error should be thrown
+							println("ERROR: tried to set component on impossible position! Created on default position for now.")
+							views[viewName].addButton(name)
+						} else {
+							views[viewName].addButton(name, xPos, yPos)
+						}
+					}
 			}
 		}
 	}

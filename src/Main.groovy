@@ -4,8 +4,8 @@ import static view.View.Widgets.*
 
 view "StartView" grid (3, 2)
 
-add "ContinueButton" type Widgets.GButton to "StartView"
-add "ExitButton" type Widgets.GButton to "StartView"
+add "ContinueButton" type Widgets.GButton to "StartView" onPos (1,1)
+add "ExitButton" type Widgets.GButton to "StartView" onPos (1,2)
 
 // My first controller :)
 on "StartView" button "ContinueButton" click { ->
