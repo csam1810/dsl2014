@@ -25,6 +25,22 @@ class ViewComponent extends JPanel {
 		super(layoutManager)
 		viewComponents = [:]
 	}
+
+	//ViewComponent() {
+	//	
+	//	super()
+	//	viewComponents = [:]
+	//}
+		
+	/**
+	 * view["SaveButton"]
+	 * 
+	 * @param componentName
+	 * @return
+	 */
+	def getAt(String componentName) {
+		return viewComponents[componentName]
+	}
 	
 //	ViewComponent(String viewname, LayoutEnum layoutType) {
 //		viewName = viewname;
@@ -50,7 +66,7 @@ class ViewComponent extends JPanel {
 	 * @param name  The name of the button.
 	 */
 	def void addButton(String name) {
-		// Hier waere Platz um den button zu stylen.
+		// Hier waere Platz um den button uniform zu stylen.
 		this.addWithName(name, new JButton(name))
 	}
 	

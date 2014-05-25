@@ -6,8 +6,7 @@ import java.awt.event.ActionListener
 
 import javax.swing.JButton
 import javax.swing.JFrame
-
-import view.ViewComponent.LayoutEnum
+import javax.swing.JPanel
 
 class View {
 	
@@ -18,7 +17,13 @@ class View {
 	
 	private static def JFrame mainFrame = new JFrame()
 	
-	static def Map<String, ViewComponent> views = [:]
+	private static def Map<String, ViewComponent> views = [:]
+	
+	/**
+	 * A static instance of the FormBuilder. Allows for
+	 * builder-like creation of Forms.
+	 */
+	static def FormBuilder builder = new FormBuilder(views)
 	
 //	static def initialize() {
 //		mainFrame = new JFrame()		
@@ -49,7 +54,7 @@ class View {
 	
 	static def view(String viewName) {
 		[grid : { Integer rows, Integer cols ->
-			views[viewName] = new ViewComponent(new GridLayout(rows, cols, 1, 1))
+			views[viewName] = new ViewComponent(new GridLayout(rows, cols, 3, 3))
 		}]
 	}
 	
@@ -90,14 +95,13 @@ class View {
 	) {
 		
 		if (viewName in views && buttonName in views[viewName].viewComponents) {
-			views[viewName].viewComponents[buttonName].addActionListener(
+			views[viewName][buttonName].addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						closure()
+						closure(views[viewName])
 					}
 				}
 			)
 		}
 	}
-	
 }
