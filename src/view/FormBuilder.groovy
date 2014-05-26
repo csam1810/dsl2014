@@ -26,28 +26,32 @@ class FormBuilder extends BuilderSupport {
 		return null
 	}
 	
+	/*
+	 * AJ: only set viewComponent layout manager after the layout has been chosen
+	 * needed to keep track of objects in the panel
+	 */
 	protected Object createNode(Object name, Map attributes){
 
 		switch (name) {
 			case 'view':
 				def id = attributes['id']
-				root = new ViewComponent(new GridLayout(1,1))
-				current = root
+				root = new ViewComponent()//(new GridLayout(1,1))
+				//current = root
 				views[id] = root
 				break
 			case 'grid':
 				def rows = attributes['rows'] ?: 1
 				def cols = attributes['cols'] ?: 1
-				def panel = new JPanel(new GridLayout(rows, cols))
-				current.add(panel)
-				current = panel
+				root.setLayout(new GridLayout(rows, cols)) //def panel = new JPanel(new GridLayout(rows,cols))
+				//current = root //root.add(panel) //current = panel
 				break
 			case 'button':
 				def id = attributes['id']
 				def text = attributes['text']
 				def button = new JButton(text)
 				root.viewComponents[id] = button
-				current.add(button)
+				root.add(button)
+				//current.add(button)
 				break
 		}	
 		return null
