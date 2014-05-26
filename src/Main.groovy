@@ -1,6 +1,7 @@
 
 import view.FormBuilder
 import view.ViewComponent
+import view.View
 //import static view.ViewComponent.LayoutEnum.*
 
 /*
@@ -26,7 +27,7 @@ add "ExitButton" type Widgets.GButton to "StartView" onPos (1,2)
 	}
 */
 
-builder.view(id: 'StartView') {
+View.builder.view(id: 'StartView') {
 	grid(rows: 3, cols: 2) {
 		button(id: 'ContinueButton', text: 'Continue')
 		button(id: 'ExitButton',     text: 'Exit')
@@ -34,21 +35,25 @@ builder.view(id: 'StartView') {
 		button(id: 'BButton',        text: 'B Button')
 	}
 }
+View.init "StartView"
+
+
+
 //println b.log
 
-// My first controller :)
-on 'StartView' button 'ContinueButton' click { ViewComponent view ->
+//// My first controller :)
+View.on 'StartView' button 'ContinueButton' click { ViewComponent view ->
 	
 	println "Continue Button clicked!"
 }
-
+//
 // My second controller :)
-on 'StartView' button 'ExitButton' click { ViewComponent view ->
+View.on 'StartView' button 'ExitButton' click { ViewComponent view ->
 	
 	println "Exit Button clicked!"
 }
-
-init "StartView"
+//
+//init 'StartView'
 
 //class SpoofBuilder extends BuilderSupport{
 //	def log = []
