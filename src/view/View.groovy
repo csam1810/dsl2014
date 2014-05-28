@@ -9,15 +9,18 @@ import javax.swing.JButton
 import javax.swing.JFrame
 import javax.swing.JPanel
 
+
+/**
+ * Diese Klasse wuerde ich gerne umbenennen zu App weil sie spaeter
+ * alle statischen Elemente (views, model, usw.) vereint.
+ */
 class View {
-	
-	static enum Widgets {
-		GButton,
-		TextBox
-	}
 	
 	private static def JFrame mainFrame = new JFrame()
 
+	/**
+	 * A mapping from unique names to views.
+	 */
 	private static def Map<String, ViewComponent> views = [:]
 	
 	/**
@@ -26,76 +29,34 @@ class View {
 	 */
 	static def FormBuilder builder = new FormBuilder(views)
 	
-//	static def initialize() {
-//		mainFrame = new JFrame()		
-//		views = [:] //new HashMap<String, ViewComponent>()
-//	}
+	// Kommt spaeter noch dazu.
+	//static def Model model
 	
-	static def init(String startPanel) {
+	// Hier kommt spaeter noch ein Navigator objekt dazu.
+	// Mit diesem Objekt soll man gemuetlich in der History
+	// zurueckblaettern koennen und natuerlich auch einfach
+	// beliebig navigieren.
+	/**
+	 * Initializes the start view of the application.
+	 * 
+	 * @param startPanel  The unique name of the start view.
+	 */
+	static def void init(String startPanel) {
 		
-		if (views.containsKey(startPanel)) {
+		if (startPanel in views) {
 			mainFrame.setContentPane(views[startPanel])
 			mainFrame.pack()
 			mainFrame.setVisible(true)
 		}
 	}
 	
-//	static def view() {
-//		[detail : { viewName -> 
-//			[layout : { LayoutEnum layout ->
-//				views[viewName] = new DetailView(viewName, layout)
-//			}]
-//		 },
-//		 lists  : {viewName -> 
-//			[layout : { LayoutEnum layout ->
-//				views[viewName] = new ListView(viewName, layout)
-//			}]
-//		 }]
-//	}
-	
-	static def view(String viewName) {
-		[grid : { Integer rows, Integer cols ->
-			GridLayout gLayout = new GridLayout(rows, cols, 1, 1)
-		}]
-	}
-	
-	static def add(String name) {
-		[type : { Widgets widget ->
-			[to : { viewName ->
-				[onPos : { Integer xPos, Integer yPos ->
-					addWidget(viewName, widget, name, xPos, yPos)
-				}]
-			}]
-		}]
-	}
-	
-	//not needed anymore?
-//	private static def addWidget(
-//		String viewName, 
-//		Widgets widget, 
-//		String name,
-//		Integer xPos,
-//		Integer yPos
-//	) {
-//	
-//		if (viewName in views) {
-//			switch (widget) {
-//				case Widgets.GButton:
-//					if(layoutManagers[viewName] instanceof GridLayout) {
-//						GridLayout grid = (GridLayout) layoutManagers[viewName]
-//						if(xPos < 0 || grid.getRows() < xPos || yPos < 0 || grid.getColumns() < yPos) {
-//							//TODO here a reasonable error should be thrown
-//							println("ERROR: tried to set component on impossible position! Created on default position for now.")
-//							views[viewName].addButton(name)
-//						} else {
-//							views[viewName].addButton(name, xPos, yPos)
-//						}
-//					}
-//			}
-//		}
-//	}
-	
-	static def on(String viewName) {
+	/**
+	 * Object literal DSL to specifiy controller actions.
+	 * 
+	 * @param viewName  The unique name of the view where the control element
+	 *                  is positioned.
+	 */
+	static def void on(String viewName) {
 		[button : { String buttonName ->
 			[click : { Closure closure ->
 				addButtonListener(viewName, buttonName, closure)
@@ -103,16 +64,16 @@ class View {
 		}]
 	}
 	
-	private static def addButtonListener(
-		String viewName, 
-		String buttonName, 
-		Closure closure
-	) {
+	/**
+	 * 
+	 */
+	private static def void addButtonListener(String viewName, String buttonName, Closure closure) {
 		
 		if (viewName in views && buttonName in views[viewName].viewComponents) {
 			views[viewName][buttonName].addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						// Der Closure werden wir spaeter noch das Model uebergeben.
 						closure(views[viewName])
 					}
 				}

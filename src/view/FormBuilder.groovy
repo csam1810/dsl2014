@@ -2,23 +2,41 @@ package view
 
 import java.awt.GridLayout
 
+import javax.swing.BorderFactory
+import javax.swing.Box
 import javax.swing.JButton
+import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JTextField
 
+/**
+ * Den builder koennen wir nach Herzenslust um neue Komponenten erweitern.
+ */
 class FormBuilder extends BuilderSupport {
 	
 	private def views
 	private def ViewComponent root
-	private def JPanel current
 	
 	FormBuilder(views) {
 		this.views = views
 	}
 
 	protected void setParent(Object parent, Object child){
+
+		if (parent != null) {
+			parent.add(child)
+		}
 	}
 	
 	protected Object createNode(Object name){
+		
+		switch (name) {
+			case 'vbox':
+				return Box.createVerticalBox()
+				
+			case 'hbox':
+				return Box.createHorizontalBox()
+		}
 		return null
 	}
 	
@@ -35,32 +53,41 @@ class FormBuilder extends BuilderSupport {
 		switch (name) {
 			case 'view':
 				def id = attributes['id']
-				root = new ViewComponent()//(new GridLayout(1,1))
-				//current = root
+				def pad = attributes['padding'] ?: 5				
+				root = new ViewComponent( new GridLayout(1,1) )				
+				root.setBorder(BorderFactory.createEmptyBorder(pad, pad, pad, pad))
 				views[id] = root
-				break
+				return root
+				
 			case 'grid':
 				def rows = attributes['rows'] ?: 1
 				def cols = attributes['cols'] ?: 1
-				root.setLayout(new GridLayout(rows, cols)) //def panel = new JPanel(new GridLayout(rows,cols))
-				//current = root //root.add(panel) //current = panel
-				break
+				return new JPanel(new GridLayout(rows,cols))		
+
+			case 'label':
+				def id = attributes['id']
+				def text = attributes['text']
+				def label = new JLabel(text)
+				root.viewComponents[id] = label
+				return label
+				
 			case 'button':
 				def id = attributes['id']
 				def text = attributes['text']
 				def button = new JButton(text)
 				root.viewComponents[id] = button
-				root.add(button)
-				//current.add(button)
-				break
+				return button
+				
+			case 'text':
+				def id = attributes['id']
+				def text = new JTextField()
+				root.viewComponents[id] = text
+				return text
 		}	
 		return null
 	}
 	
 	protected Object createNode(Object name, Map attributes, Object value){
 		return null
-	}
-	
-	protected void nodeCompleted(Object parent, Object node) {
 	}
 }

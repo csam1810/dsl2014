@@ -9,16 +9,14 @@ import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
 
+
+/**
+ * Die wuerde ich View nennen.
+ */
 class ViewComponent extends JPanel {
-	
-	public static enum LayoutEnum {
-		border, grid
-	}
 	
 	//has to be unique!!
 	def String viewName
-	
-	//def LayoutManager layout
 	
 	def Map<String, JComponent> viewComponents
 	def JComponent [][] componentMatrix
@@ -31,22 +29,10 @@ class ViewComponent extends JPanel {
 			//initializeComponentMatrix((GridLayout) layoutManager)
 		}
 	}
-
-	//ViewComponent() {
-	//	
-	//	super()
-	//	viewComponents = [:]
-	//}
-		
-	/**
-	 * view["SaveButton"]
-	 * 
-	 * @param componentName
-	 * @return
-	 */
-	def getAt(String componentName) {
-		return viewComponents[componentName]
-	}
+	
+	// Die Implementierung fuer das MatrixPanel sollte in eine eigene
+	// Klasse kommen. Ueber den builder kann der User dann diese ueber
+	// matrix(rows: 3, cols: 2) auswaehlen.
 	
 	//TODO AJ: not finished, commented for now
 //	def void initializeComponentMatrix(GridLayout grid) {
@@ -63,30 +49,13 @@ class ViewComponent extends JPanel {
 //			}
 //		}
 //	}
-	
-//	ViewComponent(String viewname, LayoutEnum layoutType) {
-//		viewName = viewname;
-//		
-//		switch(layoutType) {
-//			case LayoutEnum.border:
-//				layout = new BorderLayout();
-//				break;
-//			case LayoutEnum.grid:
-//				layout = new GridLayout();
-//				break;
-//			default:
-//				layout = null
-//				break;
-//		}
-//		
-//		viewComponents = [:]
-//	}
-	
+		
 	/**
 	 * Adds a new button to this view.
 	 * 
 	 * @param name  The name of the button.
 	 */
+	@Deprecated
 	def void addButton(String name) {
 		// Hier waere Platz um den button uniform zu stylen.
 		this.addWithName(name, new JButton(name))
@@ -109,7 +78,8 @@ class ViewComponent extends JPanel {
 	 * @param name  The name of the component in the map.
 	 * @param component  The component.
 	 */
-	private def void addWithName(String name, Component component) {
+	@Deprecated
+	def void addWithName(String name, Component component) {
 		
 		super.add(component)
 		this.viewComponents[name] = component
