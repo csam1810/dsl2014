@@ -56,7 +56,7 @@ class View {
 	 * @param viewName  The unique name of the view where the control element
 	 *                  is positioned.
 	 */
-	static def void on(String viewName) {
+	static def on(String viewName) {
 		[button : { String buttonName ->
 			[click : { Closure closure ->
 				addButtonListener(viewName, buttonName, closure)
@@ -70,7 +70,7 @@ class View {
 	private static def void addButtonListener(String viewName, String buttonName, Closure closure) {
 		
 		if (viewName in views && buttonName in views[viewName].viewComponents) {
-			views[viewName][buttonName].addActionListener(
+			views[viewName].viewComponents[buttonName].addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// Der Closure werden wir spaeter noch das Model uebergeben.
