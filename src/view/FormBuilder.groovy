@@ -62,7 +62,12 @@ class FormBuilder extends BuilderSupport {
 			case 'grid':
 				def rows = attributes['rows'] ?: 1
 				def cols = attributes['cols'] ?: 1
-				return new JPanel(new GridLayout(rows,cols))		
+				return new JPanel(new GridLayout(rows,cols))	
+				
+			case 'matrixGrid':
+				def rows = attributes['rows'] ?: 1
+				def cols = attributes['cols'] ?: 1
+				return new MatrixGridPanel(rows,cols)
 
 			case 'label':
 				def id = attributes['id']
