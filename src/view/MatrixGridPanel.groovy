@@ -9,7 +9,7 @@ import javax.swing.*
  * @author alexandra
  *
  */
-class MatrixGridPanel extends ViewComponent{
+class MatrixGridPanel extends View{
 	def static String DUMMY_TEXT = "DummyComponent"
 	def JComponent [][] componentMatrix;
 	

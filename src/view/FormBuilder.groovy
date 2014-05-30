@@ -7,6 +7,8 @@ import javax.swing.Box
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JScrollPane
+import javax.swing.JTable
 import javax.swing.JTextField
 
 /**
@@ -15,7 +17,7 @@ import javax.swing.JTextField
 class FormBuilder extends BuilderSupport {
 	
 	private def views
-	private def ViewComponent root
+	private def View root
 	
 	FormBuilder(views) {
 		this.views = views
@@ -30,6 +32,8 @@ class FormBuilder extends BuilderSupport {
 	
 	protected Object createNode(Object name){
 		
+		// TODO: Alignment-Parameter hinzufuegen.
+		//       Vorsicht: gehoert dann zum unteren switch.
 		switch (name) {
 			case 'vbox':
 				return Box.createVerticalBox()
@@ -44,17 +48,13 @@ class FormBuilder extends BuilderSupport {
 		return null
 	}
 	
-	/*
-	 * AJ: only set viewComponent layout manager after the layout has been chosen
-	 * needed to keep track of objects in the panel
-	 */
 	protected Object createNode(Object name, Map attributes){
 
 		switch (name) {
 			case 'view':
 				def id = attributes['id']
 				def pad = attributes['padding'] ?: 5				
-				root = new ViewComponent( new GridLayout(1,1) )				
+				root = new View( new GridLayout(1,1) )				
 				root.setBorder(BorderFactory.createEmptyBorder(pad, pad, pad, pad))
 				views[id] = root
 				return root
@@ -88,6 +88,12 @@ class FormBuilder extends BuilderSupport {
 				def text = new JTextField()
 				root.viewComponents[id] = text
 				return text
+				
+			case 'table':
+				def id = attributes['id']
+				def table = new JTable()				
+				root.viewComponents[id] = table
+				return new JScrollPane(table)
 		}	
 		return null
 	}
