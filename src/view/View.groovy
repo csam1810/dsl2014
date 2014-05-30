@@ -25,12 +25,11 @@ class View extends JPanel {
 	}
 
 	def getAt(String componentName) {
-		
-		//if (componentName in componentMatrix) {
-			return viewComponents[componentName]
-		//}
-		//return null
+		return viewComponents[componentName]
 	}
+	
+	// TODO: Hier InitListener Logik hinzufuegen.
+	
 	//TODO AJ: not finished, commented for now
 //	def void initializeComponentMatrix(GridLayout grid) {
 //		int rows = grid.getRows()

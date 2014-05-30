@@ -30,14 +30,20 @@ class App {
 	static def FormBuilder builder = new FormBuilder(views)
 	
 	/**
-	 * 
+	 * A static instance of the data model. Needs to be initialized
+	 * by the user like this: <br><br>
+	 * <code>
+	 * model = new Model(Sql.newInstance(        <br>
+	 * 		"jdbc:mysql://localhost:3306/demoDB", <br>
+	 * 		"demoUser",                           <br>
+	 * 		"password",                           <br>
+	 * 		"com.mysql.jdbc.Driver"               <br>
+	 * ))
+	 * </code>
 	 */
 	static def Model model
 	
-	// Hier kommt spaeter noch ein Navigator objekt dazu.
-	// Mit diesem Objekt soll man gemuetlich in der History
-	// zurueckblaettern koennen und natuerlich auch einfach
-	// beliebig navigieren.
+	// TODO: Navigator-Logik
 	/**
 	 * Initializes the start view of the application.
 	 * 
@@ -68,6 +74,11 @@ class App {
 			 [select : { Closure closure ->
 				 addSelectionListener(viewName, tableName, closure)
 			 }]
+		 },
+		 init : { Closure closure ->
+			 // TODO: Wenn view initialisiert wird soll diese closure
+			 //       ausgefuehrt werden.
+			 // addInitListener(viewName, closure)
 		 }]
 	}
 	
@@ -105,6 +116,14 @@ class App {
 		            }
 		        }
 			)
+		}
+	}
+	
+	// TODO: InitListener anmelden.
+	private static def void addInitListener(String viewName, Closure closure) {
+		
+		if (viewName in views) {
+			//closure(views[viewName], model)
 		}
 	}
 }

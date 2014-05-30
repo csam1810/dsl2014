@@ -26,6 +26,8 @@ import demo.view.StartView
  *     Evtl noch:
  *     - statische methode back() um zur vorherigen Seite zu wechseln.
  *       - Dafuer sollte der Navigator einen stack von ids unterhalten.
+ *   
+ *   o InitListener der ausgefuehrt wird wenn eine neu View angezeigt werden soll.    
  *       
  *   o Wenn view Komponenten halbwegs fix ausgewaehlt wurden koennten wir auch
  *     schon mit de Entwicklung einer Demo-App beginnen.
