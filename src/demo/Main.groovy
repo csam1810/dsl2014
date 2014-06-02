@@ -1,10 +1,11 @@
 package demo
+
 import static controller.App.*
+
 import groovy.sql.Sql
 import model.Model
 import demo.controller.StartController
 import demo.view.StartView
-
 
 /**
  * Agenda
@@ -33,9 +34,9 @@ import demo.view.StartView
  *     schon mit de Entwicklung einer Demo-App beginnen.
  *     
  * Probleme
- * 
- *   o Zur Zeit steht view und controller code in einer grossen Main datei.
- *     Habe keine Ahnung, ob wir das aendern koennen.
+ *     
+ *   o Zur Zeit alles im mainframe. Evtl. auch in neuen Frame ladbar?
+ *   o Probleme mit der Integration von BorderLayout, MatrixLayout
  */
 
 // TODO: Datenbank-Verbindung schoener gestalten.

@@ -46,38 +46,7 @@ class ModelTest {
 //		//def List<Comments> comments
 //	}
 	
-	/**
-	 * Attributes defined with def will become private
-	 * fields with Getters and Setters.
-	 *
-	 * TODO: Check Types.
-	 * TODO: Create SQL file.
-	 * TODO: Local AST Transformation for @Entity
-	 */
-	class Comment extends Entity {
-		
-		@Id
-		def id
-		
-		@Column(length = 200)
-		def user
-		
-		def email
-		
-		def webpage
-		
-		def datum
-				
-		def comments
-		
-		/**
-		 * id = getIdFieldName(Articles)
-		 * article = queryFirst(SELECT * FROM Articles WHERE ${key} = ${article}, Articles)
-		 *
-		 */
-		//@ManyToOne('comments')
-		//def Articles article
-	}
+
 	
 	@Before 
 	void setUp() {

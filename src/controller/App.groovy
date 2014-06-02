@@ -17,10 +17,7 @@ import model.Model
 class App {
 	
 	private static def JFrame mainFrame = new JFrame()
-
-	/**
-	 * A mapping from unique names to views.
-	 */
+	
 	private static def Map<String, View> views = [:]
 	
 	/**
@@ -59,7 +56,36 @@ class App {
 	}
 	
 	/**
-	 * Object literal DSL to specifiy controller actions.
+	 * DSL to query the database.
+	 *
+	 * @see Model#query(String, Class)
+	 *
+	 * @return  DB entries that match the query.
+	 */
+	static def from(Class clazz) {
+		
+		def query = new StringBuilder()
+		query << "SELECT * FROM ${clazz.simpleName}"
+		[where   : { String cond -> where(query, clazz, cond) },
+		 orderBy : { String ord  -> order(query, clazz, ord)  },
+		 end     : model.query(query.toString(), clazz)]
+	}
+
+	private static def where(StringBuilder query, Class clazz, String cond) {
+		
+		query << " WHERE ${cond}"
+		[orderBy : { String ord  -> order(query, clazz, ord) },
+		 end     : model.query(query.toString(), clazz)]
+	}
+	
+	private static def order(StringBuilder query, Class clazz, String ord) {
+		
+		query << " ORDER BY ${ord}"
+		[end : model.query(query.toString(), clazz)]
+	}
+	
+	/**
+	 * Object literal DSL to specify controller actions.
 	 * 
 	 * @param viewName  The unique name of the view where the control element
 	 *                  is positioned.
@@ -82,9 +108,6 @@ class App {
 		 }]
 	}
 	
-	/**
-	 * 
-	 */
 	private static def void addButtonListener(String viewName, String buttonName, Closure closure) {
 		
 		if (viewName in views && buttonName in views[viewName].viewComponents) {
@@ -112,7 +135,9 @@ class App {
 		        new ListSelectionListener() {
 					
 		            public void valueChanged(ListSelectionEvent event) {
-		               closure(views[viewName], model)
+						if (!event.getValueIsAdjusting()) {
+							closure(views[viewName], model)
+						}
 		            }
 		        }
 			)

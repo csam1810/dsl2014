@@ -14,7 +14,6 @@ import java.lang.reflect.Field
  */
 class Model {
 
-	/** Connection to MySQl database. */
 	private def Sql connection
 
 	/**
@@ -72,6 +71,25 @@ class Model {
 		return connection.rows(sql).collect { row -> asClass(row, clazz) }
 	}
 
+	/**
+	 * Maps a single {@link GroovyRowResult} to its entity class. Copies all
+	 * columns of the row to their equally named properties of the class.
+	 *
+	 * @param result  A GroovyRowResult
+	 * @param clazz  The entity class, to which the row will be mapped to.
+	 * @return  An Entity with all columns as properties.
+	 */
+	private def <T extends Entity> T asClass(
+		GroovyRowResult result,
+		Class<T> clazz)
+	{
+
+		def instance = clazz.newInstance()
+
+		result.keySet().each { instance."${it}" = result[it] }
+		return instance
+	}
+	
 	/**
 	 * Issues a select query and mapps the retrieved single row to its
 	 * appropriate Entity class.
@@ -137,8 +155,21 @@ class Model {
 		// Get rid of the extra lists.
 		id?.first()?.first()
 	}
-	//connection.dataSet(entity.class).add( getProperties(entity) )
-	
+
+	/**
+	 * selects all valid properties of an entity class. The properties 'class'
+	 * and 'metaClass' will be ignored and CANNOT be used as column names.
+	 *
+	 * @param entity  An Entity.
+	 * @return  A map of properties without 'class' and 'metaClass' properties.
+	 */
+	private def Map getProperties(Entity entity) {
+
+		return entity.properties.findAll { key, value ->
+			!(key in ['class', 'metaClass'])
+		}
+	}
+		
 	/**
 	 * Poor man's update function. First deletes the entry and
 	 * then inserts the updated row.
@@ -179,72 +210,5 @@ class Model {
 			"DELETE FROM " + entity?.class.simpleName + 
 			" WHERE " + name + " = ${value}"
 		)
-	}
-
-	/**
-	 * Maps a single {@link GroovyRowResult} to its entity class. Copies all  
-	 * columns of the row to their equally named properties of the class.
-	 * 	
-	 * @param result  A GroovyRowResult
-	 * @param clazz  The entity class, to which the row will be mapped to.
-	 * @return  An Entity with all columns as properties.
-	 */
-	private def <T extends Entity> T asClass(
-		GroovyRowResult result, 
-		Class<T> clazz) 
-	{
-
-		def instance = clazz.newInstance()
-
-		result.keySet().each { instance."${it}" = result[it] }
-		return instance
-	}
-
-//	private def <T extends Entity> T asClassNew(GroovyRowResult result, Class<T> clazz) {
-//		
-//		def instance = clazz.newInstance()
-//				
-//		for (Field field : clazz.declaredFields) {
-//			
-//			def name = field.name
-//			// Check if field has OneToMany Annotation
-//			if (hasOneToManyAnnotation(field)) {
-//				
-//				def fId = result[getIdFieldName(clazz)]
-//				def fKey = field.getAnnotation(OneToMany).value
-//				def fType = // Get field type
-//				
-//				instance."${name}" = query(
-//					"SELECT * FROM " + fType +
-//					" WHERE " + fKey + " = ${fId}",
-//					fType
-//				) 
-//				
-//				// Update reverse reference.
-//				instance."${name}".each { e ->
-//					e."${fKey}" = instance
-//				}
-//					
-//			} else {
-//				instance."${name}" = result[name]
-//			}
-//		}
-//		
-//		result.keySet().each { instance."${it}" = result[it] }
-//		return instance
-//	}
-		
-	/**
-	 * selects all valid properties of an entity class. The properties 'class'
-	 * and 'metaClass' will be ignored and CANNOT be used as column names.
-	 *
-	 * @param entity  An Entity.
-	 * @return  A map of properties without 'class' and 'metaClass' properties.
-	 */
-	private def Map getProperties(Entity entity) {
-
-		return entity.properties.findAll { key, value ->
-			!(key in ['class', 'metaClass'])
-		}
 	}
 }
