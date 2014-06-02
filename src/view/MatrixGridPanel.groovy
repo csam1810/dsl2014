@@ -12,23 +12,27 @@ import javax.swing.*
 class MatrixGridPanel extends View{
 	def static String DUMMY_TEXT = "DummyComponent"
 	def JComponent [][] componentMatrix;
+	def int rows
+	def int cols
 	
 	MatrixGridPanel(int r, int c) {
 		super(new GridLayout(r,c))
+		rows = r
+		cols = c
 		componentMatrix = new JComponent[r][c]
 		initMatrix()
 	}
 	
 	def void initMatrix() {
-		for(int i = 0; i < getRows(); i++) {
-			for(int j = 0; i < getColumns(); j++) {
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
 				componentMatrix[i][j] = new JButton(DUMMY_TEXT).setVisible(false)
 			}
 		}
 	}
 	
 	def void addOnPos(JComponent comp, int r, int c) {
-		if(r > getRows() || c > getColumns() || r < 0 || c < 0) {
+		if(r > rows || c > cols || r < 0 || c < 0) {
 			println "[MatrixGridPanel]: You chose an invalid position! Check the size of your grid!"
 		} else {
 			componentMatrix[r-1][c-1] = comp

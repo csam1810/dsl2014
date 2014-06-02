@@ -18,6 +18,7 @@ class FormBuilder extends BuilderSupport {
 	
 	private def views
 	private def View root
+	private def Map attr
 	
 	FormBuilder(views) {
 		this.views = views
@@ -26,7 +27,14 @@ class FormBuilder extends BuilderSupport {
 	protected void setParent(Object parent, Object child){
 
 		if (parent != null) {
-			parent.add(child)
+			if(parent instanceof MatrixGridPanel) {
+				int row = attr['row']
+				int col = attr['col']
+				parent.addOnPos(child,row,col)
+			} else {
+				parent.add(child)
+			}
+			
 		}
 	}
 	
@@ -81,6 +89,8 @@ class FormBuilder extends BuilderSupport {
 				def text = attributes['text']
 				def button = new JButton(text)
 				root.viewComponents[id] = button
+				//AJ: save all attributes to get constraints later on
+				attr = attributes
 				return button
 				
 			case 'text':
