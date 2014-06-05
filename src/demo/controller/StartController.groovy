@@ -33,9 +33,11 @@ class StartController {
 		on 'StartView' table 'PersonTable' select { View view, Model model ->
 			
 			def JTable table = view['PersonTable']
-			
-			navigate('DetailView', [id: table.getSelectedRow()])
-			println table.getSelectedRow() + " selected."
+			def selected = table.getSelectedRow()
+			if (selected != -1) {
+				navigate('DetailView', [id: selected])
+			}
+				println "${selected} selected."
 		}
 	}
 }

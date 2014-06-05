@@ -13,7 +13,7 @@ import model.Model
 
 class View extends JPanel {
 	
-	private List<Closure> initListeners
+	private def List<Closure> initListeners
 	
 	def Map<String, JComponent> viewComponents
 	//def JComponent [][] componentMatrix
