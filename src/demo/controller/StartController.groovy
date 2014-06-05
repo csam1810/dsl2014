@@ -25,7 +25,7 @@ class StartController {
 		on 'StartView' button 'ExitButton' click { View view, Model model ->
 			
 			println "Exit Button clicked!"
-			init "DetailView"
+			navigate "DetailView"
 		}
 		
 		on 'StartView' table 'PersonTable' select { View view, Model model ->

@@ -9,5 +9,5 @@ import static controller.App.*
 			}
 	}
 	
-	init('MatrixTestView')
+	navigate('MatrixTestView')
 

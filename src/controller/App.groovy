@@ -18,6 +18,8 @@ class App {
 	
 	private static def JFrame mainFrame = new JFrame()
 	
+	private static def Stack<String> viewStack = new Stack<String>()
+	
 	private static def Map<String, View> views = [:]
 	
 	/**
@@ -46,13 +48,27 @@ class App {
 	 * 
 	 * @param startPanel  The unique name of the start view.
 	 */
-	static def void init(String startPanel) {
+	static def void navigate(String panelName) {
 		
-		if (startPanel in views) {
-			mainFrame.setContentPane(views[startPanel])
-			mainFrame.pack()
-			mainFrame.setVisible(true)
+		if (panelName in views) {
+			viewStack.push(panelName)
+			displayPanel(panelName)
 		}
+	}
+	
+	static def void back() {
+		if(!viewStack.isEmpty()) {
+			viewStack.pop();
+			displayPanel(viewStack.peek())
+		} else {
+			println "[INFO]: trying to pop empty stack in back()."
+		}
+	}
+	
+	private static def void displayPanel(String panelName) {
+		mainFrame.setContentPane(views[panelName])
+		mainFrame.pack()
+		mainFrame.setVisible(true)
 	}
 	
 	/**

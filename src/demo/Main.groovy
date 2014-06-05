@@ -4,8 +4,8 @@ import static controller.App.*
 
 import groovy.sql.Sql
 import model.Model
-import demo.controller.StartController
-import demo.view.StartView
+import demo.controller.*
+import demo.view.*
 
 /**
  * Agenda
@@ -50,4 +50,7 @@ model = new Model(Sql.newInstance(
 StartView.init()
 StartController.init()
 
-init "StartView"
+DetailView.init()
+DetailViewController.init()
+
+navigate "StartView"
