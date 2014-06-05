@@ -69,6 +69,8 @@ class App {
 		mainFrame.setContentPane(views[panelName])
 		mainFrame.pack()
 		mainFrame.setVisible(true)
+		//call init listeners
+		views[panelName].callInitListeners(model)
 	}
 	
 	/**
@@ -118,9 +120,7 @@ class App {
 			 }]
 		 },
 		 init : { Closure closure ->
-			 // TODO: Wenn view initialisiert wird soll diese closure
-			 //       ausgefuehrt werden.
-			 // addInitListener(viewName, closure)
+			 addInitListener(viewName, closure)
 		 }]
 	}
 	
@@ -164,6 +164,7 @@ class App {
 	private static def void addInitListener(String viewName, Closure closure) {
 		
 		if (viewName in views) {
+			views[viewName].addInitListener(closure)
 			//closure(views[viewName], model)
 		}
 	}

@@ -8,12 +8,12 @@ import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
+import model.Model
 
 
-/**
- * Die wuerde ich View nennen.
- */
 class View extends JPanel {
+	
+	private List<Closure> initListeners
 	
 	def Map<String, JComponent> viewComponents
 	//def JComponent [][] componentMatrix
@@ -22,27 +22,21 @@ class View extends JPanel {
 		
 		super(layoutManager)
 		viewComponents = [:]
+		initListeners = []
+	}
+	
+	public def void callInitListeners(Model model) {
+		for(Closure listener in initListeners) {
+			listener(this, model)
+		}
+	}
+	
+	public def void addInitListener(Closure listener) {
+		initListeners.add(listener)
 	}
 
 	def getAt(String componentName) {
 		return viewComponents[componentName]
 	}
-	
-	// TODO: Hier InitListener Logik hinzufuegen.
-	
-	//TODO AJ: not finished, commented for now
-//	def void initializeComponentMatrix(GridLayout grid) {
-//		int rows = grid.getRows()
-//		int cols = grid.getColumns()
-//		componentMatrix = new JComponent[rows][cols]
-//		
-//		for(i in rows-1) {
-//			for(j in cols-1) {
-//				JComponent dummyComponent = new JLabel("Bla");
-//				//dummyComponent.setVisible(false)
-//				componentMatrix[i][j] = dummyComponent
-//				super.add(componentMatrix[i][j])
-//			}
-//		}
-//	}
+
 }
