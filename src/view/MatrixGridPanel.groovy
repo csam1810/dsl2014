@@ -26,7 +26,10 @@ class MatrixGridPanel extends View{
 	def void initMatrix() {
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
-				componentMatrix[i][j] = new JButton(DUMMY_TEXT).setVisible(false)
+				JButton tmp = new JButton(DUMMY_TEXT+i+j)
+				tmp.setVisible(false)
+				componentMatrix[i][j] = tmp
+				add(componentMatrix[i][j])
 			}
 		}
 	}
@@ -35,12 +38,15 @@ class MatrixGridPanel extends View{
 		if(r > rows || c > cols || r < 0 || c < 0) {
 			println "[MatrixGridPanel]: You chose an invalid position! Check the size of your grid!"
 		} else {
-			componentMatrix[r-1][c-1] = comp
-			for(int i = 0; i < r; i++) {
-				for(int j = 0; j < c; j++) {
+			removeAll();
+			componentMatrix[r][c] = comp
+			for(int i = 0; i < rows; i++) {
+				for(int j = 0; j < cols; j++) {
 					add(componentMatrix[i][j])
 				}
 			}
+			revalidate();
+			repaint();
 		}
 	}
 }
