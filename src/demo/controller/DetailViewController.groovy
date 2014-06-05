@@ -15,7 +15,7 @@ class DetailViewController {
 			
 			println "Back Button clicked!"
 			
-			back()
+			back([:])
 		}
 	}
 }

@@ -59,10 +59,10 @@ class App {
 		}
 	}
 	
-	static def void back() {
+	static def void back(Map args) {
 		if(!viewStack.isEmpty()) {
 			viewStack.pop();
-			displayPanel(viewStack.peek())
+			displayPanel(viewStack.peek(),args)
 		} else {
 			println "[INFO]: trying to pop empty stack in back()."
 		}
