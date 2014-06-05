@@ -82,6 +82,7 @@ class FormBuilder extends BuilderSupport {
 				def text = attributes['text']
 				def label = new JLabel(text)
 				root.viewComponents[id] = label
+				attr = attributes
 				return label
 				
 			case 'button':
@@ -97,12 +98,14 @@ class FormBuilder extends BuilderSupport {
 				def id = attributes['id']
 				def text = new JTextField()
 				root.viewComponents[id] = text
+				attr = attributes
 				return text
 				
 			case 'table':
 				def id = attributes['id']
 				def table = new JTable()				
 				root.viewComponents[id] = table
+				attr = attributes
 				return new JScrollPane(table)
 		}	
 		return null

@@ -25,9 +25,9 @@ class View extends JPanel {
 		initListeners = []
 	}
 	
-	public def void callInitListeners(Model model) {
+	public def void callInitListeners(Model model, Map args) {
 		for(Closure listener in initListeners) {
-			listener(this, model)
+			listener(this, model, args)
 		}
 	}
 	

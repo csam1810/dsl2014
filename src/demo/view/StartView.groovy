@@ -10,7 +10,7 @@ class StartView {
 			vbox() {
 				table(id: 'PersonTable')
 				hbox() {
-					button(id: 'LoadButton', text: 'Load data')
+					button(id: 'DetailButton', text: 'Details')
 					button(id: 'ExitButton', text: 'Exit')
 				}
 			}

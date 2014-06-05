@@ -49,10 +49,13 @@ class App {
 	 * @param startPanel  The unique name of the start view.
 	 */
 	static def void navigate(String panelName) {
-		
+		navigate(panelName,[:])
+	}
+	
+	static def void navigate(String panelName, Map args) {
 		if (panelName in views) {
 			viewStack.push(panelName)
-			displayPanel(panelName)
+			displayPanel(panelName, args)
 		}
 	}
 	
@@ -65,12 +68,12 @@ class App {
 		}
 	}
 	
-	private static def void displayPanel(String panelName) {
+	private static def void displayPanel(String panelName, Map args) {
 		mainFrame.setContentPane(views[panelName])
 		mainFrame.pack()
 		mainFrame.setVisible(true)
 		//call init listeners
-		views[panelName].callInitListeners(model)
+		views[panelName].callInitListeners(model,args)
 	}
 	
 	/**

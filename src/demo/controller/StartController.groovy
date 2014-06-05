@@ -13,21 +13,14 @@ class StartController {
 
 	static def init() {
 		
-		on 'StartView' init { View view, Model model ->
+		on 'StartView' init { View view, Model model, Map args ->
 			def JTable table = view['PersonTable']
 			def header = ['Last Name', 'First Name', 'Birthday'] as String[]
 					
 			table.setModel( new PersonTableModel(model[Person], header))
 		}
 		
-		on 'StartView' button 'LoadButton' click { View view, Model model ->
-			
-			
-//			def JTable table = view['PersonTable']			
-//			def header = ['Last Name', 'First Name', 'Birthday'] as String[]
-//					
-//			table.setModel( new PersonTableModel(model[Person], header) )
-			
+		on 'StartView' button 'DetailButton' click { View view, Model model ->
 			println "Load Button clicked!"
 		}
 		
@@ -41,9 +34,7 @@ class StartController {
 			
 			def JTable table = view['PersonTable']
 			
-			// TODO: Zu anderer View navigieren mit parametern.
-			// navigate('ViewName', [id: table.getSelectedRow()])
-			// navigate('ViewName')
+			navigate('DetailView', [id: table.getSelectedRow()])
 			println table.getSelectedRow() + " selected."
 		}
 	}
