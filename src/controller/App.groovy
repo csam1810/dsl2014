@@ -60,6 +60,10 @@ class App {
 		}
 	}
 	
+	static def void back() {
+		back([:])
+	}
+	
 	static def void back(Map args) {
 		if(!viewStack.isEmpty()) {
 			viewStack.pop();
@@ -174,12 +178,10 @@ class App {
 		}
 	}
 	
-	// TODO: InitListener anmelden.
 	private static def void addInitListener(String viewName, Closure closure) {
 		
 		if (viewName in views) {
 			views[viewName].addInitListener(closure)
-			//closure(views[viewName], model)
 		}
 	}
 }

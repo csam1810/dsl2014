@@ -5,10 +5,17 @@ import static controller.App.*
 class DetailView {
 	static def init() {
 		builder.view(id: 'DetailView', padding: 10) {
-			matrixGrid(rows: 3, cols: 3) {
-				button(id: 'Back', text: 'Back', row: 1, col: 2)
-				button(id: 'TestButton2', text: 'TestButton2', row: 2, col: 2)
-				button(id: 'TestButton3', text: 'TestButton3', row: 0, col: 0)
+			matrixGrid(rows: 4, cols: 2) {
+				label(text: 'Last Name:', row: 0, col: 0)
+				text(id: 'LastNameText', row: 0, col: 1)
+				
+				label(text: 'First Name:', row: 1, col: 0)
+				text(id: 'FirstNameText', row: 1, col: 1)
+				
+				label(text: 'Birthday:', row: 2, col: 0)
+				text(id: 'BirthdayText', row: 2, col: 1)
+				
+				button(id: 'Back', text: 'Back', row: 3, col: 0)
 			}
 		}
 	}

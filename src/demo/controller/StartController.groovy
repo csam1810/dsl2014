@@ -15,7 +15,7 @@ class StartController {
 		
 		on 'StartView' init { View view, Model model, Map args ->
 			def JTable table = view['PersonTable']
-			def header = ['Last Name', 'First Name', 'Birthday'] as String[]
+			def header = ['ID', 'Last Name', 'First Name', 'Birthday'] as String[]
 					
 			table.setModel( new PersonTableModel(model[Person], header))
 		}
@@ -34,8 +34,10 @@ class StartController {
 			
 			def JTable table = view['PersonTable']
 			def selected = table.getSelectedRow()
+
 			if (selected != -1) {
-				navigate('DetailView', [id: selected])
+				def id = table.getValueAt(selected, 0)
+				navigate('DetailView', [id: id])
 			}
 				println "${selected} selected."
 		}

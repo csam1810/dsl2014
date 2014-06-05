@@ -29,10 +29,12 @@ class PersonTableModel extends AbstractTableModel {
 		
 		switch (columnIndex) {
 			case 0:
-				return p.lastName
+				return p.id
 			case 1:
-				return p.firstName
+				return p.lastName
 			case 2:
+				return p.firstName
+			case 3:
 				return p.birthday.toString()
 			default:
 				return 'xxx'
