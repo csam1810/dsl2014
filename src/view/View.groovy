@@ -16,8 +16,14 @@ class View extends JPanel {
 	private def List<Closure> initListeners
 	
 	def Map<String, JComponent> viewComponents
-	//def JComponent [][] componentMatrix
+	//def JComponent [][] componentMatrix //viec check, löschen?
 	
+	/**
+	 *viec unterstützte layoutmanager hinschreiben
+	 * View constructor.
+	 * For every view a layoutManager has to be defined.  
+	 * @param layoutManager LayoutManager for view
+	 */
 	View(LayoutManager layoutManager) {
 		
 		super(layoutManager)
@@ -25,16 +31,30 @@ class View extends JPanel {
 		initListeners = []
 	}
 	
+	/**
+	 * Call all previously defined init listener for view
+	 * @param model Used model is necessary
+	 * @param args Arguments can be defined
+	 */
 	public def void callInitListeners(Model model, Map args) {
 		for(Closure listener in initListeners) {
 			listener(this, model, args)
 		}
 	}
 	
+	/**
+	 * Listener are added to list
+	 * @param listener which will be added to initListener of view
+	 */
 	public def void addInitListener(Closure listener) {
 		initListeners.add(listener)
 	}
 
+	/**
+	 * Get view component object by name
+	 * @param componentName Name of requested component
+	 * @return requested component
+	 */
 	def getAt(String componentName) {
 		return viewComponents[componentName]
 	}

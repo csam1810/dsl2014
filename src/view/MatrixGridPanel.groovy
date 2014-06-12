@@ -4,10 +4,7 @@ import java.awt.GridLayout
 import javax.swing.*
 
 /**
- * Basic class that can be used for a matrix implementation of the grid layout.
- * 
- * @author alexandra
- *
+ * MatrixGridLayout provide opportunity to define a grid and add components in defined cell 
  */
 class MatrixGridPanel extends View{
 	def static String DUMMY_TEXT = "DummyComponent"
@@ -15,6 +12,11 @@ class MatrixGridPanel extends View{
 	def int rows
 	def int cols
 	
+	/**
+	 * Constructor for MatrixGridPanel with a defined size 
+	 * @param r Number of rows
+	 * @param c Number of columns
+	 */
 	MatrixGridPanel(int r, int c) {
 		super(new GridLayout(r,c))
 		rows = r
@@ -23,6 +25,9 @@ class MatrixGridPanel extends View{
 		initMatrix()
 	}
 	
+	/**
+	 * All cells in the matrix are initially filled with dummy elements
+	 */
 	def void initMatrix() {
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -34,9 +39,16 @@ class MatrixGridPanel extends View{
 		}
 	}
 	
+	/**
+	 *viec mögliche componenten angeben? 
+	 * Add a JComponent at the position defined by row and column
+	 * @param comp JComponent which should be added
+	 * @param r row 
+	 * @param c column
+	 */
 	def void addOnPos(JComponent comp, int r, int c) {
 		if(r > rows || c > cols || r < 0 || c < 0) {
-			println "[MatrixGridPanel]: You chose an invalid position! Check the size of your grid!"
+			println "[MatrixGridPanel]: You choose an invalid position! Check the size of your grid!"
 		} else {
 			removeAll();
 			componentMatrix[r][c] = comp

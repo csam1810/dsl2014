@@ -12,7 +12,8 @@ import javax.swing.JTable
 import javax.swing.JTextField
 
 /**
- * Den builder koennen wir nach Herzenslust um neue Komponenten erweitern.
+ * Builder handles the user defined application and creates the view components
+ * viec 
  */
 class FormBuilder extends BuilderSupport {
 	
@@ -24,6 +25,11 @@ class FormBuilder extends BuilderSupport {
 		this.views = views
 	}
 
+	/**
+	 * Add child object to parent
+	 * If parent is an instance of MatrixGridPanel, the child is add at the given position, 
+	 * otherwise just added to parent
+	 */
 	protected void setParent(Object parent, Object child){
 
 		if (parent != null) {
@@ -38,9 +44,12 @@ class FormBuilder extends BuilderSupport {
 		}
 	}
 	
+	/**
+	 * viec 
+	 */
 	protected Object createNode(Object name){
 		
-		// TODO: Alignment-Parameter hinzufuegen.
+		// viec - was ist damit gemeint? TODO: Alignment-Parameter hinzufuegen.
 		//       Vorsicht: gehoert dann zum unteren switch.
 		switch (name) {
 			case 'vbox':
@@ -56,6 +65,32 @@ class FormBuilder extends BuilderSupport {
 		return null
 	}
 	
+	/**viec bsp angeben? format?
+	 * The following is supported:
+	 * view: id, padding, generates  a rootview which is always a Gridlayout with 1 Cell
+	 * and uses given padding and added to views
+				??viec always name root??
+				return
+				
+		grid: size is defined by number of rows and columns 
+		returns a JPanel
+				
+		matrixGrid: size is defined by number of rows and columns
+		return MatrixGridPanel
+		//viec default value angeben?
+
+		label: id and text has to be defined, data are stored as attributes map
+		return JLabel
+				
+		button: id and text has to be defined, data are stored as attributes map
+		return JButton
+								
+		text: id has to be defined, data are stored as attributes map
+		return new JTextField
+				
+		table: id has to be defined, data are stored as attributes map
+		return JTable				
+	 */
 	protected Object createNode(Object name, Map attributes){
 
 		switch (name) {
@@ -90,7 +125,7 @@ class FormBuilder extends BuilderSupport {
 				def text = attributes['text']
 				def button = new JButton(text)
 				root.viewComponents[id] = button
-				//AJ: save all attributes to get constraints later on
+				//save all attributes to get constraints later on
 				attr = attributes
 				return button
 				
@@ -110,6 +145,7 @@ class FormBuilder extends BuilderSupport {
 		}	
 		return null
 	}
+	
 	
 	protected Object createNode(Object name, Map attributes, Object value){
 		return null
