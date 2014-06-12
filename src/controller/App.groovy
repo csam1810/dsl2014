@@ -46,12 +46,21 @@ class App {
 	/**
 	 * Initializes the start view of the application.
 	 * 
-	 * @param startPanel  The unique name of the start view.
+	 * @param panelName  The unique name of the view
 	 */
 	static def void navigate(String panelName) {
+		//no arguments necessary therefore empty map 
 		navigate(panelName,[:])
 	}
 	
+	/**
+	 * Navigate to next view.
+	 * Example for arguments: id of data record which should be displayed in the view
+	 * Views are stored on viewStack for back function
+	 *
+	 * @param panelName  The unique name of the view
+	 * @param args Arguments used in view
+	 */
 	static def void navigate(String panelName, Map args) {
 		if (panelName in views) {
 			viewStack.push(panelName)
@@ -60,10 +69,20 @@ class App {
 		}
 	}
 	
+	/**
+	 * Back function to previous view (arguments not necessary).
+	 */
 	static def void back() {
 		back([:])
 	}
 	
+	/**
+	 * Back function with arguments to previous view which is stored on viewStack
+	 * Example for arguments: id of data record which should be displayed in the view,
+	 * Views are stored on viewStack for back function
+	 * 
+	 * @param args Arguments used in view
+	 */
 	static def void back(Map args) {
 		if(!viewStack.isEmpty()) {
 			viewStack.pop();
@@ -74,6 +93,11 @@ class App {
 		}
 	}
 	
+	/**
+	 * Print current content of stack.
+	 * Extended debugging function
+	 * @param action
+	 */
 	static def void printStack(String action) {
 		println action
 		println "--------------------------------"
@@ -82,6 +106,7 @@ class App {
 		}
 		println "\n"
 	} 
+	
 	
 	private static def void displayPanel(String panelName, Map args) {
 		mainFrame.setContentPane(views[panelName])
@@ -92,6 +117,7 @@ class App {
 	}
 	
 	/**
+	 * viec check 
 	 * DSL to query the database.
 	 *
 	 * @see Model#query(String, Class)
@@ -107,6 +133,7 @@ class App {
 		 end     : model.query(query.toString(), clazz)]
 	}
 
+	
 	private static def where(StringBuilder query, Class clazz, String cond) {
 		
 		query << " WHERE ${cond}"
@@ -114,13 +141,14 @@ class App {
 		 end     : model.query(query.toString(), clazz)]
 	}
 	
+	
 	private static def order(StringBuilder query, Class clazz, String ord) {
 		
 		query << " ORDER BY ${ord}"
 		[end : model.query(query.toString(), clazz)]
 	}
 	
-	/**
+	/**viec check - more details?
 	 * Object literal DSL to specify controller actions.
 	 * 
 	 * @param viewName  The unique name of the view where the control element
