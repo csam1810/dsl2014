@@ -42,7 +42,7 @@ class App {
 	 */
 	static def Model model
 	
-	// TODO: Navigator-Logik
+
 	/**
 	 * Initializes the start view of the application.
 	 * 
