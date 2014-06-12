@@ -1,6 +1,11 @@
 package demo
 import static controller.App.*
 
+	/**
+	 * Testview
+	 * viec löschen? 	
+	 */
+
 	builder.view(id: 'MatrixTestView', padding: 10) {
 			matrixGrid(rows: 3, cols: 3) {
 				button(id: 'TestButton1', text: 'TestButton1', row: 1, col: 2)

@@ -2,6 +2,11 @@ package demo.view
 
 import static controller.App.*
 
+/**
+ * Defined view for demo application
+ * View shows detailed information to a person and has a back button
+ */
+
 class DetailView {
 	static def init() {
 		builder.view(id: 'DetailView', padding: 10) {

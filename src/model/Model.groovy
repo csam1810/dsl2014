@@ -6,11 +6,9 @@ import groovy.sql.Sql
 import java.lang.reflect.Field
 
 /**
- * TODO: ConnectionBuilder Support?
- *
- * @author alexandra
- * @author carmen
- * @author mathias
+ * viec TODO: ConnectionBuilder Support?
+
+Definition of the model, logic and persistence functions
  */
 class Model {
 
@@ -43,7 +41,6 @@ class Model {
 	 * Deletes the entity from the model.
 	 * 
 	 * @param entity  The entity to be deleted.
-	 * @return  Nothing.
 	 */
 	def rightShift(Entity entity) {
 		delete(entity)
@@ -91,7 +88,7 @@ class Model {
 	}
 	
 	/**
-	 * Issues a select query and mapps the retrieved single row to its
+	 * Issues a select query and maps the retrieved single row to its
 	 * appropriate Entity class.
 	 * 
 	 * @param sql  The SQL select query.
@@ -144,7 +141,7 @@ class Model {
 		def colStr = columns.join(', ')
 		def valStr = qmarks.join(', ')
 		
-		// Insert data and retrieve assigend id.
+		// Insert data and retrieve assigned id.
 		def id = connection.executeInsert(
 			"INSERT INTO " + entity?.class.simpleName + 
 			" (" + colStr + ") VALUES (" + valStr + ")", 

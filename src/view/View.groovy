@@ -10,7 +10,10 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import model.Model
 
-
+/**
+ * Definition of view with components of the view and listener 
+ *
+ */
 class View extends JPanel {
 	
 	private def List<Closure> initListeners
@@ -19,10 +22,12 @@ class View extends JPanel {
 	//def JComponent [][] componentMatrix //viec check, löschen?
 	
 	/**
-	 *viec unterstützte layoutmanager hinschreiben
 	 * View constructor.
-	 * For every view a layoutManager has to be defined.  
+	 * For every view a layoutManager has to be defined:  
+	 * Either gridLayout or matrixGridLayout
 	 * @param layoutManager LayoutManager for view
+	 * @link java.awt.GridLayout
+	 * @see MatrixGridPanel
 	 */
 	View(LayoutManager layoutManager) {
 		

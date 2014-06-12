@@ -5,6 +5,11 @@ import model.Model
 import view.View
 import demo.model.Person
 
+/**
+ * Controller for a view in demo application
+ * contains controller logic
+ * viec gleicher detailslierungsgrad wie startview
+ */
 class DetailViewController {
 	static def init() {
 		
@@ -16,10 +21,8 @@ class DetailViewController {
 			view['BirthdayText'].setText(p.birthday.toString())
 		}
 		
-		on 'DetailView' button 'Back' click { View view, Model model ->
-			
-			println "Back Button clicked!"
-			
+		on 'DetailView' button 'Back' click { View view, Model model ->			
+			println "Back Button clicked!"			
 			back()
 		}
 	}

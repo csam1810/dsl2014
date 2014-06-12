@@ -9,6 +9,12 @@ import view.View
 import demo.model.Person
 import demo.view.*
 
+/**
+ * Controller for StartView in demo application
+ * contains controller logic
+ * viec jeden punkt erklären?
+ */
+
 class StartController {
 
 	static def init() {
@@ -19,11 +25,11 @@ class StartController {
 					
 			table.setModel( new PersonTableModel(model[Person], header))
 		}
-		
 		on 'StartView' button 'DetailButton' click { View view, Model model ->
-			println "Load Button clicked!"
+			println "Detail Button clicked!"
 		}
 		
+		//viec navigate gehört zu detailbutton!
 		on 'StartView' button 'ExitButton' click { View view, Model model ->
 			
 			println "Exit Button clicked!"
@@ -34,7 +40,7 @@ class StartController {
 			
 			def JTable table = view['PersonTable']
 			def selected = table.getSelectedRow()
-
+			
 			if (selected != -1) {
 				def id = table.getValueAt(selected, 0)
 				navigate('DetailView', [id: id])

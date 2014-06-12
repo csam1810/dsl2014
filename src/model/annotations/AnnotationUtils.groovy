@@ -7,10 +7,6 @@ import model.Entity
 /**
  * A collection of static methods to query and process the database 
  * annotations.
- * 
- * @author alexandra
- * @author carmen
- * @author mathias
  */
 class AnnotationUtils {
 
@@ -40,7 +36,7 @@ class AnnotationUtils {
 	}
 	
 	/**
-	 * 
+	 * viec verwendet?
 	 * 
 	 * @param clazz  The database entity class type.
 	 * @return  A mapping from field names to annotations for that field.

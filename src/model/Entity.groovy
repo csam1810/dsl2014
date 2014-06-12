@@ -1,10 +1,7 @@
 package model
 
 /**
- * 
- *
- * @author alexandra
- * @author carmen
- * @author mathias
+ * viec genug?
+ Entity used in model
  */
 class Entity {}

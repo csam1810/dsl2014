@@ -4,6 +4,9 @@ import javax.swing.table.AbstractTableModel
 
 import demo.model.Person
 
+/**
+ * Defined Table for demo application
+ */
 class PersonTableModel extends AbstractTableModel {
 
 	def List<Person> persons
@@ -14,15 +17,27 @@ class PersonTableModel extends AbstractTableModel {
 		this.header = header
 		this.persons = persons
 	}
-
+	
+	
+	/**
+	 * Get number of datasets
+	 * @return Number of persons
+	 * */
 	def int getRowCount() {
 		return persons.size()
 	}
 
+	/**
+	 * Get number of fields
+	 * @return Number of fields
+	 */
 	def int getColumnCount() {
 		return header.length
 	}
 
+	/**
+	 * Get data for a specific dataset with given row and the field depending on the given column
+	 */
 	def Object getValueAt(int rowIndex, int columnIndex) {
 		
 		def Person p = this.persons.get(rowIndex)
@@ -41,11 +56,15 @@ class PersonTableModel extends AbstractTableModel {
 		}
 	}
 
+	/**
+	 * Get name of field for a field with given index
+	 * @return fieldname
+	 */
 	def String getColumnName(int index) {
 		return header[index]
 	}
 
-	// TODO: Add and delete
+	// viec TODO: Add and delete
 	// def void add(Person person)
 	// def void delete(int rowIndex)
 }

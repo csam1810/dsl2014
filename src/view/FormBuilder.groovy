@@ -13,7 +13,32 @@ import javax.swing.JTextField
 
 /**
  * Builder handles the user defined application and creates the view components
- * viec 
+ * 
+ * 	viec bsp angeben? format?
+	The following is supported:
+		view: id has to be defined, gaps to the border can be defined by padding (default value is 5), 
+		it generates  a view which is a Gridlayout with 1 Cell which is added to list views
+	    return View which is a JPanel
+				
+		grid: size is defined by number of rows and columns 
+		returns a JPanel
+				
+		matrixGrid: size is defined by number of rows and columns, default value is first cell with row and column 1
+		return MatrixGridPanel
+		viec default values
+
+		label: id and text has to be defined, data are stored as attributes map
+		return JLabel
+				
+		button: id and text has to be defined, data are stored as attributes map
+		return JButton
+								
+		text: id has to be defined, data are stored as attributes map
+		return new JTextField
+				
+		table: id has to be defined, data are stored as attributes map
+		return JTable				
+	
  */
 class FormBuilder extends BuilderSupport {
 	
@@ -39,8 +64,7 @@ class FormBuilder extends BuilderSupport {
 				parent.addOnPos(child,row,col)
 			} else {
 				parent.add(child)
-			}
-			
+			}			
 		}
 	}
 	
@@ -65,32 +89,9 @@ class FormBuilder extends BuilderSupport {
 		return null
 	}
 	
-	/**viec bsp angeben? format?
-	 * The following is supported:
-	 * view: id, padding, generates  a rootview which is always a Gridlayout with 1 Cell
-	 * and uses given padding and added to views
-				??viec always name root??
-				return
-				
-		grid: size is defined by number of rows and columns 
-		returns a JPanel
-				
-		matrixGrid: size is defined by number of rows and columns
-		return MatrixGridPanel
-		//viec default value angeben?
-
-		label: id and text has to be defined, data are stored as attributes map
-		return JLabel
-				
-		button: id and text has to be defined, data are stored as attributes map
-		return JButton
-								
-		text: id has to be defined, data are stored as attributes map
-		return new JTextField
-				
-		table: id has to be defined, data are stored as attributes map
-		return JTable				
-	 */
+/**
+ * see FormBuilder
+ */
 	protected Object createNode(Object name, Map attributes){
 
 		switch (name) {
