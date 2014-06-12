@@ -6,7 +6,7 @@ import groovy.sql.Sql
 import java.lang.reflect.Field
 
 /**
- * viec TODO: ConnectionBuilder Support?
+ * viec TODO: ConnectionBuilder Support? db daten übergeben
 
 Definition of the model, logic and persistence functions
  */
@@ -108,7 +108,6 @@ class Model {
 	 */
 	def <T extends Entity> T get(Integer id, Class<T> clazz) {
 
-		// TODO: Null Check.
 		def name = getIdFieldName(clazz)
 		return queryFirst(
 			"SELECT * FROM " + clazz?.simpleName + 

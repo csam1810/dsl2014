@@ -1,7 +1,6 @@
 package model
 
 /**
- * viec genug?
- Entity used in model
+ Entity used in model as marker class
  */
 class Entity {}

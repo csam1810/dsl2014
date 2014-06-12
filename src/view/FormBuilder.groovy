@@ -14,18 +14,16 @@ import javax.swing.JTextField
 /**
  * Builder handles the user defined application and creates the view components
  * 
- * 	viec bsp angeben? format?
-	The following is supported:
+ 	The following is supported:
 		view: id has to be defined, gaps to the border can be defined by padding (default value is 5), 
 		it generates  a view which is a Gridlayout with 1 Cell which is added to list views
 	    return View which is a JPanel
 				
-		grid: size is defined by number of rows and columns 
+		grid: size is defined by number of rows and columns, default value is first cell with row and column 1
 		returns a JPanel
 				
 		matrixGrid: size is defined by number of rows and columns, default value is first cell with row and column 1
 		return MatrixGridPanel
-		viec default values
 
 		label: id and text has to be defined, data are stored as attributes map
 		return JLabel
@@ -69,12 +67,10 @@ class FormBuilder extends BuilderSupport {
 	}
 	
 	/**
-	 * viec 
+	 * Create Vertical or horizontal box
 	 */
 	protected Object createNode(Object name){
 		
-		// viec - was ist damit gemeint? TODO: Alignment-Parameter hinzufuegen.
-		//       Vorsicht: gehoert dann zum unteren switch.
 		switch (name) {
 			case 'vbox':
 				return Box.createVerticalBox()

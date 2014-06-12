@@ -8,7 +8,6 @@ import demo.model.Person
 /**
  * Controller for a view in demo application
  * contains controller logic
- * viec gleicher detailslierungsgrad wie startview
  */
 class DetailViewController {
 	static def init() {

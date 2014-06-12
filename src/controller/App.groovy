@@ -13,7 +13,12 @@ import view.FormBuilder;
 import view.View;
 import model.Model
 
-
+/**
+ * Controller which has knowledge about view and model
+ * Logic for navigation, dsl, calls methods on views and models
+ * viec dsl - etwas darüber sagen?
+ *
+ */
 class App {
 	
 	private static def JFrame mainFrame = new JFrame()
@@ -117,9 +122,11 @@ class App {
 	}
 	
 	/**
-	 * viec check 
+	 * viec check, falls im view verwenden, dann nit dokumentieren
 	 * DSL to query the database.
-	 *
+	 * Can be used in controller.
+	 * todo bsp angeben
+	 * viec end
 	 * @see Model#query(String, Class)
 	 *
 	 * @return  DB entries that match the query.
@@ -148,8 +155,7 @@ class App {
 		[end : model.query(query.toString(), clazz)]
 	}
 	
-	/**viec check - more details?
-	 * Object literal DSL to specify controller actions.
+	/**Object literal DSL to specify controller actions.
 	 * 
 	 * @param viewName  The unique name of the view where the control element
 	 *                  is positioned.

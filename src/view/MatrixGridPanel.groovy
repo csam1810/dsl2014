@@ -40,7 +40,6 @@ class MatrixGridPanel extends View{
 	}
 	
 	/**
-	 *viec mögliche componenten angeben? 
 	 * Add a JComponent at the position defined by row and column
 	 * @param comp JComponent which should be added
 	 * @param r row 

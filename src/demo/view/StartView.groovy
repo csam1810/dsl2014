@@ -13,10 +13,6 @@ class StartView {
 		builder.view(id: 'StartView', padding: 10) {
 			vbox() {
 				table(id: 'PersonTable')
-				hbox() {
-					button(id: 'DetailButton', text: 'Details')
-					button(id: 'ExitButton', text: 'Exit')
-				}
 			}
 		}
 	}

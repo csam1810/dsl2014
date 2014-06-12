@@ -2,8 +2,7 @@ package demo
 import static controller.App.*
 
 	/**
-	 * Testview
-	 * viec löschen? 	
+	 * Testviews	
 	 */
 
 	builder.view(id: 'MatrixTestView', padding: 10) {

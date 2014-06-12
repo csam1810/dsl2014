@@ -19,7 +19,6 @@ class View extends JPanel {
 	private def List<Closure> initListeners
 	
 	def Map<String, JComponent> viewComponents
-	//def JComponent [][] componentMatrix //viec check, löschen?
 	
 	/**
 	 * View constructor.

@@ -25,16 +25,7 @@ class StartController {
 					
 			table.setModel( new PersonTableModel(model[Person], header))
 		}
-		on 'StartView' button 'DetailButton' click { View view, Model model ->
-			println "Detail Button clicked!"
-		}
 		
-		//viec navigate gehört zu detailbutton!
-		on 'StartView' button 'ExitButton' click { View view, Model model ->
-			
-			println "Exit Button clicked!"
-			navigate "DetailView"
-		}
 		
 		on 'StartView' table 'PersonTable' select { View view, Model model ->
 			

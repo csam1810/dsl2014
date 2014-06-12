@@ -36,7 +36,7 @@ class AnnotationUtils {
 	}
 	
 	/**
-	 * viec verwendet?
+	 * viec verwendet? suchen vermutl nicht notw
 	 * 
 	 * @param clazz  The database entity class type.
 	 * @return  A mapping from field names to annotations for that field.
