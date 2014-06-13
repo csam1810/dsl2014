@@ -51,12 +51,12 @@ class ModelTest {
 	@Before 
 	void setUp() {
 	
-		this.model = new Model(Sql.newInstance(
+		this.model = new Model(
 			"jdbc:mysql://localhost:3306/testDB",
 			"testUser",
 			"password",
 			"com.mysql.jdbc.Driver"
-		))	
+		)	
 		
 		this.c = new Comment()
 		this.c.user = 'harald'
