@@ -64,7 +64,9 @@ class PersonTableModel extends AbstractTableModel {
 		return header[index]
 	}
 
-	// viec TODO: Add and delete
-	// def void add(Person person)
+//	def void add(Person person) {
+//		persons << person
+//		fireTableDataChanged()
+//	}
 	// def void delete(int rowIndex)
 }

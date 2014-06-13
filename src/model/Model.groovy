@@ -3,24 +3,16 @@ package model
 import static model.annotations.AnnotationUtils.*
 import groovy.sql.GroovyRowResult
 import groovy.sql.Sql
-import java.lang.reflect.Field
 
 /**
- * viec TODO: ConnectionBuilder Support? db daten übergeben
-
-Definition of the model, logic and persistence functions
+ * Definition of the model, logic and persistence functions.
  */
 class Model {
 
 	private def Sql connection
 
-	/**
-	 * Creates a new model from a Sql connection object.
-	 * 
-	 * @param connection  A Sql instance.
-	 */
-	Model(Sql connection) {
-		this.connection = connection
+	Model(String database, String user, String password, String driver) {
+		this.connection = Sql.newInstance(database, user, password, driver)
 	}
 	
 	/**

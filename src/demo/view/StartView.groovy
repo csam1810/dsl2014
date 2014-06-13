@@ -13,6 +13,9 @@ class StartView {
 		builder.view(id: 'StartView', padding: 10) {
 			vbox() {
 				table(id: 'PersonTable')
+				hbox() {
+					button(id: 'Add', text: 'Add')
+				}
 			}
 		}
 	}

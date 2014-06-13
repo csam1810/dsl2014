@@ -14,16 +14,12 @@ import demo.view.*
  * viec nur an dieser stelle erwähnt, überall notw? 
  * viec private methoden nicht dokumentiert, außer es gab bereits doku
  */
-
-// viec TODO: Datenbank-Verbindung schoener gestalten.
-
-
-model = new Model(Sql.newInstance(
+model = new Model(
 	"jdbc:mysql://localhost:3306/demoDB",
 	"demoUser",
 	"password",
 	"com.mysql.jdbc.Driver"
-))
+)
 
 
 //defined views and their controller have to be initialized
@@ -31,7 +27,10 @@ StartView.init()
 StartController.init()
 
 DetailView.init()
-DetailViewController.init()
+DetailController.init()
+
+NewView.init()
+NewController.init()
 
 //start with the first view in the demo application 
 navigate "StartView"

@@ -2,13 +2,9 @@ package demo.view
 
 import static controller.App.*
 
-/**
- * Defined view for demo application
- * View shows detailed information to a person and has a back button
- */
-class DetailView {
+class NewView {
 	static def init() {
-		builder.view(id: 'DetailView', padding: 10) {
+		builder.view(id: 'NewView', padding: 10) {
 			matrixGrid(rows: 4, cols: 2) {
 				label(text: 'Last Name:', row: 0, col: 0)
 				text(id: 'LastNameText', row: 0, col: 1)

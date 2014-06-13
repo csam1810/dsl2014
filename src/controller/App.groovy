@@ -69,7 +69,7 @@ class App {
 	static def void navigate(String panelName, Map args) {
 		if (panelName in views) {
 			viewStack.push(panelName)
-			printStack("navigate to ${panelName}")
+			//printStack("navigate to ${panelName}")
 			displayPanel(panelName, args)
 		}
 	}
@@ -91,7 +91,7 @@ class App {
 	static def void back(Map args) {
 		if(!viewStack.isEmpty()) {
 			viewStack.pop();
-			printStack("back to ${viewStack.peek()}")
+			//printStack("back to ${viewStack.peek()}")
 			displayPanel(viewStack.peek(),args)
 		} else {
 			println "[INFO]: trying to pop empty stack in back()."
@@ -103,14 +103,14 @@ class App {
 	 * Extended debugging function
 	 * @param action
 	 */
-	static def void printStack(String action) {
-		println action
-		println "--------------------------------"
-		for (String vn in viewStack) {
-			println " - ${vn}"
-		}
-		println "\n"
-	} 
+//	static def void printStack(String action) {
+//		println action
+//		println "--------------------------------"
+//		for (String vn in viewStack) {
+//			println " - ${vn}"
+//		}
+//		println "\n"
+//	} 
 	
 	
 	private static def void displayPanel(String panelName, Map args) {
