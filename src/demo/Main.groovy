@@ -11,8 +11,7 @@ import demo.view.*
 /**
  * Demo Implementation with demoDB, user = demoUser and password = password
  * Authors: Mathias Hoertnagl, Alexandra Jaeger, Carmen Vierthaler
- * viec nur an dieser stelle erwähnt, überall notw? 
- * viec private methoden nicht dokumentiert, außer es gab bereits doku
+ * Praesentation: Vor- und Nachteile, Architektur
  */
 model = new Model(
 	"jdbc:mysql://localhost:3306/demoDB",

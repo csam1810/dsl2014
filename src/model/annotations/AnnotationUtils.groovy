@@ -34,21 +34,4 @@ class AnnotationUtils {
 	static def getIdFieldValue(Entity entity) {
 		entity?."${getIdFieldName(entity?.class)}"
 	}
-	
-	/**
-	 * viec verwendet? suchen vermutl nicht notw
-	 * 
-	 * @param clazz  The database entity class type.
-	 * @return  A mapping from field names to annotations for that field.
-	 */
-	@Deprecated
-	static def getFieldAnnotations(Class clazz) {
-		
-		def Map<String, Annotation[]> map = [:]
-		
-		clazz.declaredFields.each { field ->
-			map[field.name] = field.annotations
-		}
-		map
-	}
 }

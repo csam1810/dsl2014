@@ -15,9 +15,7 @@ import model.Model
 
 /**
  * Controller which has knowledge about view and model
- * Logic for navigation, dsl, calls methods on views and models
- * viec dsl - etwas darüber sagen?
- *
+ * Logic for navigation sql queries, methods for views and models
  */
 class App {
 	
@@ -122,11 +120,8 @@ class App {
 	}
 	
 	/**
-	 * viec check, falls im view verwenden, dann nit dokumentieren
-	 * DSL to query the database.
-	 * Can be used in controller.
-	 * todo bsp angeben
-	 * viec end
+	 * DSL to query the database. Can be used by user in controller.
+	 * TODO bsp angeben
 	 * @see Model#query(String, Class)
 	 *
 	 * @return  DB entries that match the query.

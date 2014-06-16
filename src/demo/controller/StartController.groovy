@@ -11,8 +11,7 @@ import demo.view.*
 
 /**
  * Controller for StartView in demo application
- * contains controller logic
- * viec jeden punkt erklären?
+ * Contains controller logic
  */
 
 class StartController {
