@@ -5,13 +5,6 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import java.lang.annotation.Target
 
-/**
- *
- *
- * @author alexandra
- * @author carmen
- * @author mathias
- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @interface Column {

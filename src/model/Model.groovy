@@ -190,10 +190,8 @@ class Model {
 	 */
 	def void delete(Entity entity) {
 
-		// TODO: Null Check.
 		def name = getIdFieldName(entity?.class)
 		def value = entity."${name}"
-		// TODO: Throws ?
 		connection.execute(
 			"DELETE FROM " + entity?.class.simpleName + 
 			" WHERE " + name + " = ${value}"

@@ -121,7 +121,6 @@ class App {
 	
 	/**
 	 * DSL to query the database. Can be used by user in controller.
-	 * TODO bsp angeben
 	 * @see Model#query(String, Class)
 	 *
 	 * @return  DB entries that match the query.

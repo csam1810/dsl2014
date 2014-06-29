@@ -11,7 +11,6 @@ import demo.view.*
 /**
  * Demo Implementation with demoDB, user = demoUser and password = password
  * Authors: Mathias Hoertnagl, Alexandra Jaeger, Carmen Vierthaler
- * Praesentation: Vor- und Nachteile, Architektur
  */
 model = new Model(
 	"jdbc:mysql://localhost:3306/demoDB",
